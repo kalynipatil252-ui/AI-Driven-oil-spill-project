@@ -26,10 +26,10 @@ if uploaded_file is not None:
         # =========================
 
         # 1. Convert to grayscale
-        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        gray = st.cvtColor(img, st.COLOR_BGR2GRAY)
 
         # 2. STRONG DENOISING (Non-Local Means)
-        denoised = cv2.fastNlMeansDenoising(
+        denoised = st.fastNlMeansDenoising(
             gray,
             h=15,          # Filter strength (10–20 recommended)
             templateWindowSize=7,
@@ -37,7 +37,7 @@ if uploaded_file is not None:
         )
 
         # 3. Resize to model input size
-        resized = cv2.resize(denoised, (256, 256))
+        resized = st.resize(denoised, (256, 256))
 
         # 4. Normalize pixel values
         normalized = resized / 255.0

@@ -1,24 +1,25 @@
 import streamlit as st
-
 import numpy as np
+from PIL import Image
 from tensorflow.keras.models import load_model
+
 
 st.title("🛢️ Oil Spill Detection System")
 
 # Load trained Keras classification model
 model = load_model("my_classification_model.keras")
 
-file = st.file_uploader("Upload Satellite Image", type=["jpg", "jpeg", "png"])
+uploaded_file = st.file_uploader("Upload satellite image", type=["jpg", "png", "jpeg"])
 
-if file:
-    # Read image bytes
-    file_bytes = np.asarray(bytearray(file.read()), dtype=np.uint8)
-    img = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
+if uploaded_file is not None:
+    image = Image.open(uploaded_file).convert("RGB")
+    image = image.resize((256, 256))
 
-    if img is None:
-        st.error("Could not load image. Please upload a valid image file.")
-    else:
-        st.image(img, caption="Uploaded Image", use_column_width=True)
+    img_array = np.array(image) / 255.0
+    img_array = np.expand_dims(img_array, axis=0)
+
+    st.image(image, caption="Uploaded Image", use_column_width=True)
+
 
         # =========================
         # 🔹 PREPROCESSING PIPELINE

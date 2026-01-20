@@ -1,5 +1,26 @@
+# Core
+python>=3.8
 
+# Web App
 streamlit
-opencv-python
+
+# Deep Learning
+tensorflow==2.13.0
+
+# Image Processing
+opencv-python-headless
+Pillow
+
+# Data Handling
 numpy
-tensorflow
+pandas
+
+# Visualization (for notebooks)
+matplotlib
+seaborn
+
+# Machine Learning Utilities
+scikit-learn
+
+# Progress bars / utilities
+tqdm
